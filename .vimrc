@@ -1,17 +1,31 @@
 " Set compatibility to Vim only.
 set nocompatible
 set nolist
-"set rnu
+" Esto sirve para ver lineas relativas a donde estas
+set rnu
 " Helps force plug-ins to load correctly when it is turned back on below.
 filetype off
 
+" Configuracion de NerdTree
+autocmd StdinReadPre * let s:std_in=1
+"Esto es para que vim inicie NERD si no das input
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"uncomenta lo siguiente para iniciar NERDTree cada vez
+"autocmd vimenter * NERDTree
+
+"para jedi
+set completeopt=menuone,longest,preview
+
+"Configuracion para color, relacionado a nvim
+:set termguicolors 
+:hi Cursor guifg=green guibg=green
+:hi Cursor2 guifg=red guibg=red
+:set guicursor=n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor50
+
+"Para html :)
+let g:user_emmet_leader_key=','
 
 
-
-
-
-" Turn on syntax highlighting.
-syntax on
 
 " For plug-ins to load correctly.
 filetype plugin indent on
@@ -75,8 +89,23 @@ set smartcase
 set viminfo='100,<9999,s100
 
 call plug#begin('~/.vim/plugged')
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
+Plug 'preservim/nerdtree'
+Plug 'davidhalter/jedi-vim'
+Plug 'mattn/emmet-vim'
 call plug#end()
 
+
+"colorscheme anderson
+colorscheme desert
+
+" Turn on syntax highlighting.
+syntax on
+
+" Configuracion de Jedi
+let g:jedi#use_tabs_not_buffers = 1
+"En caso de continuar lento despues de iteraciones
+let g:pymode_rope = 0
