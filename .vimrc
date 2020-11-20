@@ -1,8 +1,14 @@
 " Set compatibility to Vim only.
 set nocompatible
 set nolist
+
+
+"Numero de Linea -------------------------------------------------
 " Esto sirve para ver lineas relativas a donde estas
 set rnu
+" Show line numbers
+set number
+
 " Helps force plug-ins to load correctly when it is turned back on below.
 filetype off
 
@@ -14,7 +20,13 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "autocmd vimenter * NERDTree
 
 "para jedi
-set completeopt=menuone,longest,preview
+"set completeopt=menuone,longest,preview
+
+"activar iconos para vim airline
+let g:airline_powerline_fonts=1
+let g:Powerline_symbols='unicode'
+let g:airline#extensions#tabline#enabled = 1
+
 
 "Configuracion para color, relacionado a nvim
 :set termguicolors 
@@ -25,6 +37,29 @@ set completeopt=menuone,longest,preview
 "Para html :)
 let g:user_emmet_leader_key=','
 
+"Mapeos ---------------------------------------------------
+"Mapeo para FZF
+"El mejor mapeo de la via lactea :)
+"inoremap es para mapear algo en instermode
+"cnoremap para command mode
+
+"noremap para normal mode
+nnoremap <silent> <C-f> :Files<CR>
+"Mapeo para NERDTree
+nnoremap <silent> <C-q> :NERDTree<CR>
+"Mapeo para Quitar Highlight
+nnoremap <silent> <C-h> :nohl<CR>
+
+"Escapar de modo insertar y modo comando con 
+inoremap kj <esc>
+cnoremap kj <esc>
+inoremap <silent> <C-d> <esc>
+cnoremap <silent> <C-d> <esc>
+
+"Guardar y salir con Ctrl+s
+nnoremap <silent> <C-s> :wq<CR>
+
+"Mapeos end -----------------------------------------------
 
 
 " For plug-ins to load correctly.
@@ -35,6 +70,7 @@ set modelines=0
 
 " Automatically wrap text that extends beyond the screen length.
 set wrap
+
 " Vim's auto indentation feature does not work properly with text copied from outside of Vim. Press the <F2> key to toggle paste mode on/off.
 nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O>:set invpaste paste?<CR>
@@ -64,11 +100,9 @@ set laststatus=2
 set showmode
 set showcmd
 
-" Highlight matching pairs of brackets. Use the '%' character to jump between them.
+"Usar '%' para saltar entre matching brackets, y aparte que tengan hl
 set matchpairs+=<:>
 
-" Show line numbers
-set number
 
 " Set status line display
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [BUFFER=%n]\ %{strftime('%c')}
@@ -94,9 +128,12 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdtree'
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 Plug 'mattn/emmet-vim'
+"Plug 'cjrh/vim-conda'
+"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 call plug#end()
+
 
 
 "colorscheme anderson
@@ -106,6 +143,15 @@ colorscheme desert
 syntax on
 
 " Configuracion de Jedi
-let g:jedi#use_tabs_not_buffers = 1
+"let g:jedi#use_tabs_not_buffers = 1
 "En caso de continuar lento despues de iteraciones
-let g:pymode_rope = 0
+"let g:pymode_rope = 0
+"Que jedi utilice el entorno virtual de python dado por conda
+"let $VIRTUAL_ENV = $CONDA_PREFIX
+
+
+"remap para coc 
+"inoremap <silent><expr> <c-space> coc#refresh()
+"
+"
+
