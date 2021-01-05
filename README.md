@@ -1,7 +1,9 @@
 # dotfiles
 
-Archivos de configuracion, presentes aqui para backup y sharing
-utilizo neo-vim y zsh
+Archivos de configuracion
+
+En vimclean se encuentra el .vimrc que solo contiene lo escencial, sin plugins de manera que es un buen punto de partida,
+incluye comandos comodos como reemplazar el Escape con kj
 
 /vimrc
 contiene el archivo de configuracion de vim, el cual visito varias veces en la serie de videos de youtube
