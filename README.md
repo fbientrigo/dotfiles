@@ -12,13 +12,15 @@ Para instalar vimplugin en Windows 10, corre el siguiente comando en la consola 
 # dotfiles
   > Vainilla // contiene los archivos para el video, para lograr la configuracion mas basica
   >
-  > vimplugins //se refieren la version del video en la seccion 'Sobre vimrc'
-  > vimclean //se refieren la version del video en la seccion 'Sobre vimrc'
+  > vimplugins //se refieren la version del video en la seccion [Sobre vimrc](https://github.com/fbientrigo/dotfiles#sobre-vimrc)
+  >
+  > vimclean //se refieren la version del video en la seccion [Sobre vimrc](https://github.com/fbientrigo/dotfiles#sobre-vimrc)
   
 Lo que seguira es el como crear
 ## Que plugins lleva?
   > Vainilla // Unicamente el esqueleto
     vimplug (manager de plugins):
+
   > Programing // Basico Programacion con Autocompletado
     air-line: cambia la UI de vim dandole colores y mas informacion
     emmet: plugin para escribir rapido html
