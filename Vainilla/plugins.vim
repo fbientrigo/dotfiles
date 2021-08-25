@@ -5,7 +5,7 @@
 call plug#begin('~/.vim/plugged')
 
 "Temas, instalaremos uno primero para probar
-"  Plug 'sheerun/vim-polyglot'
+  Plug 'sheerun/vim-polyglot'
 
 " Para cerrar pares () {} []  ''
 "  Plug 'jiangmiao/auto-pairs'
