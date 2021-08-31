@@ -7,7 +7,6 @@
   syntax on "encendemos la capacidad de usar sintaxis
   "modifica la barrita, agregando inclusive un reloj, descomentar para activar
   "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [BUFFER=%n]\ %{strftime('%c')}
-  colorscheme synthwave84
 
 " Utiles
    set tabstop=2 "para tener tabs no tan exagerados
@@ -26,5 +25,5 @@
 " Source: Este apartado sirve para incluir otro archivo como init.vim
 " lo que se hace es juntar un archivo de config
   source ~/AppData/Local/nvim/shortcuts.vim
-  source ~/AppData/Local/nvim/plugins.vim
   source ~/AppData/Local/nvim/cocc.vim
+  source ~/AppData/Local/nvim/plugins.vim
