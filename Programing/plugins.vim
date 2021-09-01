@@ -35,14 +35,6 @@ call plug#end()
 
 
 
-" Plugins Visualez -------------------------------------------------
-"Configuracion para color, relacionado a nvim
-" esto es mas un tema base que cambie un poco la Powershell
-  :set termguicolors 
-
-
-
-
 " Instrucciones de Uso
 " :PlugInstall "Instalara todos los Plugins en tu fichero de plugins
-"
+" :PlugClean

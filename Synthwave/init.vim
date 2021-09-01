@@ -7,8 +7,9 @@
   syntax on "encendemos la capacidad de usar sintaxis
   "modifica la barrita, agregando inclusive un reloj, descomentar para activar
   "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [BUFFER=%n]\ %{strftime('%c')}
+  set termguicolors
 
-" Utiles
+  " Utiles
    set tabstop=2 "para tener tabs no tan exagerados
   set shiftwidth=2 "size para indentar
 	set smartindent

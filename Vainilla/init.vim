@@ -22,20 +22,7 @@
   set ignorecase "al buscar ignora diferencias entre mayusculas y minusculas, muy util
   set smartcase " si buscamos mayusculas, es que sabemos lo que buscamos, en ese caso hara lo inteligente y deseado
 
-	
-" Shortcuts_____________________________________________________
-" Sobre salir y entrar de modos----------
-  " \\ entrar en modo comando
-  imap <leader><leader> <esc>:
-  inoremap <silent> <C-d> <esc>
-  cnoremap <silent> <C-d> <esc>
-  "quitar Highlight
-  nnoremap <silent> <C-h> :nohl<CR>
-
-  " ficheros-----------------------------
-  "guardar y salir con Ctrl + s
-  nnoremap <silent> <C-s> :wq<CR>
-
 " Source: Este apartado sirve para incluir otro archivo como init.vim
 " lo que se hace es juntar un archivo de config
   source ~/AppData/Local/nvim/plugins.vim
+  source ~/AppData/Local/nvim/shortcuts.vim

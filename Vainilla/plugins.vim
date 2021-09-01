@@ -5,12 +5,14 @@
 call plug#begin('~/.vim/plugged')
 
 "Temas, instalaremos uno primero para probar
-  Plug 'sheerun/vim-polyglot'
-
 " Para cerrar pares () {} []  ''
-"  Plug 'jiangmiao/auto-pairs'
-"  Plug 'alvan/vim-closetag'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'alvan/vim-closetag'
 
 " ------------
 call plug#end()
 
+" Comandos relacionados a Plugins
+" :PlugInstall > Instala todos los Plugins aqui
+" :PlugClean   > Limpia Plugins esten descargados pero no aqui (limpiar)
+"

@@ -7,7 +7,8 @@
   syntax on "encendemos la capacidad de usar sintaxis
   "modifica la barrita, agregando inclusive un reloj, descomentar para activar
   "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [BUFFER=%n]\ %{strftime('%c')}
-  
+  set termguicolors
+
 " Utiles
    set tabstop=2 "para tener tabs no tan exagerados
   set shiftwidth=2 "size para indentar
@@ -21,24 +22,8 @@
   set ignorecase "al buscar ignora diferencias entre mayusculas y minusculas, muy util
   set smartcase " si buscamos mayusculas, es que sabemos lo que buscamos, en ese caso hara lo inteligente y deseado
 
-	
-" Shortcuts_____________________________________________________
-" Sobre salir y entrar de modos----------
-  " \\ entrar en modo comando
-  imap <leader><leader> <esc>:
-  inoremap <silent> <C-d> <esc>
-  cnoremap <silent> <C-d> <esc>
-  "quitar Highlight
-  nnoremap <silent> <C-h> :nohl<CR>
-
-  " ficheros-----------------------------
-  "guardar y salir con Ctrl + s
-  nnoremap <silent> <C-s> :wq<CR>
-  "solo salir; te dira si no guardaste los cambios
-  nnoremap <silent> <C-q> :q<CR> 
-
-
 " Source: Este apartado sirve para incluir otro archivo como init.vim
 " lo que se hace es juntar un archivo de config
+  source ~/AppData/Local/nvim/shortcuts.vim
   source ~/AppData/Local/nvim/plugins.vim
   source ~/AppData/Local/nvim/cocc.vim

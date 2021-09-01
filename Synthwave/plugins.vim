@@ -44,8 +44,6 @@ call plug#end()
   colorscheme synthwave84
 
 
-
-
 " Instrucciones de Uso
 " :PlugInstall "Instalara todos los Plugins en tu fichero de plugins
 " :PlugClean :Limpiara los plugins no utilizados"
