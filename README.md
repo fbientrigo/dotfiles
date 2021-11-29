@@ -1,4 +1,4 @@
-[Aprende a instalar neoveim](https://www.youtube.com/channel/UCrT4HAZk3llYywwqhtfHeDw)
+[Aprende a instalar neovim Windows 10](https://www.youtube.com/watch?v=9qOR9NhCMpg&t=394s)
 
 ## Comandos de instalacion usados
 
