@@ -33,5 +33,10 @@ asi como algunas configuraciones utiles; este video te ayudara a crear o modific
 o crear tu propio de manera mas personalizada
 https://www.youtube.com/watch?v=16DcEP-wc7c
 
+## Mazos de Anki?
+En el mazo que deje en la carpeta puedes aprender a utilizar Vim asi como a utilizar
+mi confi personalizada, aqui un [video tutorial](https://youtu.be/mlWHKuN47YQ) de como usar Anki
+Donde tambien puedes encontrar mazos de fisica y otros
+
 ## Referencias
 [vim-plug](https://github.com/junegunn/vim-plug)

@@ -15,6 +15,11 @@
 
   " Python ----
   " <F5> para correr el archivo python actual dentro del terminal
-  autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-  autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+  autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python' shellescape(@%, 1)<CR>
+  autocmd FileType python imap <buffer> <F5> <esc>:w<CR>:exec '!python' shellescape(@%, 1)<CR>
 
+  " Vim Modificar --------
+  " el <leader> es el Espacio
+  let mapleader=" "
+  " entrar al init.vim (osea config -> C)
+  nnoremap <leader>c :tabe ~/AppData/Local/nvim/init.vim
