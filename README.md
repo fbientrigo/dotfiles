@@ -27,7 +27,8 @@ Para instalar vimplugin en Windows 10, corre el siguiente comando en la consola 
     
 
 ## Sobre vimrc
-El archivo vimrc ya no existe aqui, utilizaremos init.vim en su lugar; la configuracion es equivalente
+Puedes utilizar el init.vim en su lugar, pero si buscas los archivos exactos para usar el .vimrc:
+	Se encuentran en la carpeta `Old vimrc`
 aqui puedes ver mi video antiguo de como funciona este archivo de configuracion mas en profundidad
 asi como algunas configuraciones utiles; este video te ayudara a crear o modificar un archivo existente
 o crear tu propio de manera mas personalizada
