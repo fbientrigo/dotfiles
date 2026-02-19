@@ -1,0 +1,165 @@
+# ~/.bash_prompt
+# Powerline-style prompt for WSL bash (NerdFont + ble.sh optional)
+
+# ANSI wrappers (prevent cursor glitches)
+wrap() { printf "\[\033[%sm\]" "$1"; }
+FG() { wrap "38;5;$1"; }
+BG() { wrap "48;5;$1"; }
+RST() { wrap "0"; }
+BGDEF() { wrap "49"; }
+
+SEP=""
+
+# Palette (256-color)
+BG_WSL=60
+BG_PATH=24
+BG_GIT=90
+BG_PY=58
+BG_TIME=238
+BG_ERR=88
+
+FG_LIGHT=231
+FG_DIM=250
+FG_WARN=229
+
+# Icons (NerdFont)
+ICON_WSL=""
+ICON_DIR=""
+ICON_GIT=""
+ICON_STAGE=""
+ICON_DIRTY=""
+ICON_PY=""
+ICON_CLK=""
+ICON_WARN=""
+
+seg() {
+  local text="$1" fg="$2" bg="$3" nextbg="$4" last="$5"
+  printf "%s%s %s " "$(FG "$fg")" "$(BG "$bg")" "$text"
+  if [ "$last" = "1" ]; then
+    printf "%s%s%s%s" "$(BGDEF)" "$(FG "$bg")" "$SEP" "$(RST)"
+  else
+    printf "%s%s%s" "$(FG "$bg")" "$(BG "$nextbg")" "$SEP"
+  fi
+}
+
+# Git segment (branch + staged/dirty)
+git_segment() {
+  command -v git >/dev/null 2>&1 || return 1
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 1
+
+  local branch staged=0 dirty=0
+  branch="$(git branch --show-current 2>/dev/null)"
+  if [ -z "$branch" ]; then
+    local sha
+    sha="$(git rev-parse --short HEAD 2>/dev/null)" || return 1
+    branch="detached@$sha"
+  fi
+
+  local line x y
+  while IFS= read -r line; do
+    [ ${#line} -lt 2 ] && continue
+    x="${line:0:1}"
+    y="${line:1:1}"
+    [ "$x" != " " ] && [ "$x" != "?" ] && staged=1
+    [ "$y" != " " ] && dirty=1
+    [ "$x" = "?" ] && [ "$y" = "?" ] && dirty=1
+  done < <(git status --porcelain 2>/dev/null)
+
+  local suffix="" fg="$FG_LIGHT"
+  [ "$staged" = "1" ] && suffix="$suffix $ICON_STAGE"
+  [ "$dirty" = "1" ] && suffix="$suffix $ICON_DIRTY"
+  [ "$staged" = "1" ] || [ "$dirty" = "1" ] && fg="$FG_WARN"
+
+  printf "%s|%s" "$fg" "$ICON_GIT $branch$suffix"
+}
+
+# Python env (venv or conda)
+py_segment() {
+  if [ -n "$VIRTUAL_ENV" ]; then
+    printf "%s" "$ICON_PY $(basename "$VIRTUAL_ENV")"
+    return 0
+  fi
+  if [ -n "$CONDA_DEFAULT_ENV" ]; then
+    printf "%s" "🅒 $CONDA_DEFAULT_ENV"
+    return 0
+  fi
+  return 1
+}
+
+# WSL detection
+is_wsl() {
+  [ -n "$WSL_DISTRO_NAME" ] && return 0
+  grep -qi microsoft /proc/version 2>/dev/null && return 0
+  return 1
+}
+
+# Last command duration (>1s) if ble.sh present
+last_duration_segment() {
+  [ -n "${BLE_CMD_DURATION-}" ] || return 1
+  local ms="$BLE_CMD_DURATION"
+  [ "$ms" -ge 1000 ] || return 1
+  if [ "$ms" -lt 10000 ]; then
+    awk -v ms="$ms" 'BEGIN{printf " %.1fs", ms/1000.0}'
+  else
+    awk -v ms="$ms" 'BEGIN{printf " %.0fs", ms/1000.0}'
+  fi
+}
+
+build_ps1() {
+  local parts=()
+  local fgs=()
+  local bgs=()
+
+  if [ "$?" -ne 0 ]; then
+    parts+=("$ICON_WARN ERR"); fgs+=("$FG_LIGHT"); bgs+=("$BG_ERR")
+  fi
+
+  local t
+  if t="$(last_duration_segment)"; then
+    parts+=("$t"); fgs+=("$FG_DIM"); bgs+=("$BG_TIME")
+  fi
+
+  if is_wsl; then
+    parts+=("$ICON_WSL WSL"); fgs+=("$FG_LIGHT"); bgs+=("$BG_WSL")
+  fi
+
+  local py
+  if py="$(py_segment)"; then
+    parts+=("$py"); fgs+=("$FG_LIGHT"); bgs+=("$BG_PY")
+  fi
+
+  local p="${PWD/#$HOME/~}"
+  parts+=("$ICON_DIR $p"); fgs+=("$FG_LIGHT"); bgs+=("$BG_PATH")
+
+  local g fg txt
+  if g="$(git_segment)"; then
+    fg="${g%%|*}"
+    txt="${g#*|}"
+    parts+=("$txt"); fgs+=("$fg"); bgs+=("$BG_GIT")
+  fi
+
+  local out=""
+  local n="${#parts[@]}"
+  for ((i=0; i<n; i++)); do
+    local last=0 nextbg=0
+    if [ $i -eq $((n-1)) ]; then
+      last=1
+    else
+      nextbg="${bgs[$((i+1))]}"
+    fi
+    out+=$(seg "${parts[$i]}" "${fgs[$i]}" "${bgs[$i]}" "$nextbg" "$last")
+  done
+
+  PS1="$out "
+}
+
+PROMPT_COMMAND=build_ps1
+
+# --- Optional: ble.sh for inline predictions (autosuggestions) ---
+# Install:
+#   sudo apt update && sudo apt install -y git
+#   git clone --depth 1 https://github.com/akinomyoga/ble.sh.git ~/.ble.sh
+# Then enable in ~/.bashrc (AFTER sourcing this file):
+#   source ~/.ble.sh/out/ble.sh
+#   bleopt complete_autoshow=1
+#   bleopt autosuggest_async=1
